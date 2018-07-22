@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/animate.css">
+    <style>
+     
+    </style>
+</head>
+
+<body>
+    <div id="example-2">
+        <button @click="show = !show">Toggle show</button>
+        <transition 
+        enter-active-class="animated jello"
+        leave-active-class="animated hinge"
+        >
+            <p v-if="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia diam fermentum
+                id. Pellentesque habitant morbi tristique senectus et netus.</p>
+        </transition>
+    </div>
+</body>
+
+</html>
+<script src="./lib/vue.js"></script>
+<script>
+    /*
+        animate.css 很著名的动画库
+        https://daneden.github.io/animate.css/
+    */ 
+    new Vue({
+        el: '#example-2',
+        data: {
+            show: true
+        }
+    })
+
+
+</script>

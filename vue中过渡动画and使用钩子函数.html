@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            transition: all 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="toggle" @click="show=!show">
+        <br>
+        <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter" v-on:enter-cancelled="enterCancelled"
+            v-on:before-leave="beforeLeave" v-on:leave="leave" v-on:after-leave="afterLeave" v-on:leave-cancelled="leaveCancelled">
+            <img v-show="show" src="./img/7c258e53105888181e0eecc2c432b889.png" alt="">
+        </transition>
+    </div>
+</body>
+
+</html>
+<script src="./lib/vue.js"></script>
+<script>
+    /*
+        钩子函数 类似 事件
+            动画 在适当的时候 会触发 你注册的函数
+        vue中的钩子函数
+            注册之后 在适当的时候 会触发 我能够在里面 写自己的逻辑
+            类似于 window.onload 
+    */
+    let app = new Vue({
+        el: "#app",
+        data: {
+            show: false
+        },
+        // ...
+        methods: {
+            // --------
+            // 进入中
+            // --------
+
+            beforeEnter: function (el) {
+                console.log('beforeEnter-触发啦!!!!');
+                // console.log(el);
+                el.style.transform = "scale(.5)";
+                // ...
+            },
+            // 此回调函数是可选项的设置
+            // 与 CSS 结合时使用
+            enter: function (el, done) {
+                console.log('enter-触发啦!!!!');
+                el.style.transform = "scale(1.5)";
+                // ...
+                setTimeout(() => {
+                    done()
+                }, 1000);
+            },
+            afterEnter: function (el) {
+                console.log('afterEnter-触发啦!!!!');
+                el.style.transform = "scale(1)";
+                // ...
+            },
+            enterCancelled: function (el) {
+                console.log('enterCancelled-触发啦!!!!');
+                // ...
+            },
+
+            // --------
+            // 离开时
+            // --------
+
+            beforeLeave: function (el) {
+                console.log('beforeLeave-触发啦!!!!');
+                // ...
+            },
+            // 此回调函数是可选项的设置
+            // 与 CSS 结合时使用
+            leave: function (el, done) {
+                console.log('leave-触发啦!!!!');
+                // ...
+                done()
+            },
+            afterLeave: function (el) {
+                console.log('afterLeave-触发啦!!!!');
+                // ...
+            },
+            // leaveCancelled 只用于 v-show 中
+            leaveCancelled: function (el) {
+                console.log('leaveCancelled-触发啦!!!!');
+                // ...
+            }
+        }
+    })
+</script>
